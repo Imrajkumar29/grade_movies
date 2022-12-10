@@ -1,6 +1,10 @@
 import {Movie} from "./Movie.js";
+import {useState} from "react";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+
 function Movielist(){
-    const movieList= [
+    const [movieList,setMovieList]= useState([
       {
         name: "Vikram",
         poster:
@@ -71,11 +75,42 @@ function Movielist(){
         summary:
           "Remy, a rat, aspires to become a renowned French chef. However, he fails to realise that people despise rodents and will never enjoy a meal cooked by him."
       }
-    ];
+    ]);
+
+    const[name,setName]=useState("");
+    const[poster,setPoster]=useState("");
+    const[rating,setSummary]=useState("");
+    const[summary,setRating]=useState("");
+
+    const addMovie=()=>{
+        const newMovie={
+            name,
+            poster,
+            rating,
+            summary,
+        };
+        // copy the movieList and then add newMovie to it
+        setMovieList([...movieList,newMovie]);
+    }
     return(
-      <div className='movie-list-container'>
-        {movieList.map((mv)=>(<Movie movie={mv}/>
+        <div>
+            <br></br>
+               <div className="add-movie-form">
+               <TextField id="Name" label="Name" variant="outlined"
+                onChange ={(event)=>setName(event.target.value)} type ="text"/>
+               <TextField id="Poster" label="Poster" variant="outlined"
+                onChange ={(event)=>setPoster(event.target.value)} type ="text"/>
+               <TextField id="Rating" label="Rating" variant="outlined"
+                onChange ={(event)=>setRating(event.target.value)} type ="text"/>
+                <TextField id="Summary" label="Summary" variant="outlined"
+                 onChange ={(event)=>setSummary(event.target.value)} type ="text"/>
+                <Button variant="contained" onClick={addMovie}>add movie</Button>
+                <br></br>
+                </div>
+        <div className='movie-list-container'>
+        {movieList.map((mv,index)=>(<Movie key={index} movie={mv}/>
         ))}
+        </div>
       </div>
     );
   }

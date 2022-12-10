@@ -6,7 +6,7 @@ import {Movie} from "./Movie.js";
 
 function App() {
   return (
-    <div className="App">
+     <div className="App">
       <Movielist/>  
     </div>
   );
