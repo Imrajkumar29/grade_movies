@@ -1,3 +1,4 @@
+import {Counter} from "./Counter.js";
 function Movie({movie}){
     
     const ratingstyle ={
@@ -11,7 +12,9 @@ function Movie({movie}){
       <p style ={ratingstyle} className ="movie-rating">⭐{movie.rating}</p>
       </div>
       <p className ="movie-summary">{movie.summary}</p>
-    </div>);
+      <Counter/>
+    </div>
+    );
   }
   export{Movie};
   
