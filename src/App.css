@@ -1,6 +1,5 @@
 .App {
-  font-family:Roboto,sans-serif;
-  text-align: center;
+  font-family:Roboto,sans-serif;    
 }
 
 .movie-specs {
@@ -22,7 +21,7 @@
 }
 
 .movie-name{
-  font-size:18px;
+  font-size:24px;
   margin:0;
 }
 
@@ -52,9 +51,7 @@
   display:flex;
   flex-direction:column;
   gap:10px;
-  align-items: center;
-  justify-content: center;
-  width:100%;
+  width:300px;
 }
 
 
