@@ -54,4 +54,12 @@
   width:300px;
 }
 
+.not-found{
+  width:100%;
+  object-fit: cover;
+}
 
+.movie-details-container{
+  max-width: 750px;
+  padding:16px;
+}
