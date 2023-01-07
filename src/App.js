@@ -1,8 +1,11 @@
 import './App.css';
 import {useState} from "react";
 import {AddMovies} from "./AddMovies.js";
+import {BasicForm} from "./BasicForm.js";
 import {Movielist} from "./Movielist.js";
 import Button from '@mui/material/Button';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 import {
   Routes,
   Route,
@@ -14,9 +17,17 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { NotFound } from './NotFound';
 import { MovieDetails } from './MovieDetails';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 
 function App() {
+  const [mode,setMode] =useState("light");
+  const darkTheme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
   const navigate =useNavigate();
   const [movieList,setMovieList]= useState(
     [
@@ -114,12 +125,20 @@ function App() {
   );
 
   return (
+    <ThemeProvider theme={darkTheme}>
+       <Paper sx ={{minHeight:"100vh", borderRadius: "0px" }} elevation={4}>
      <div className="App"> 
   <AppBar position="static">
         <Toolbar>
           <Button onClick={()=>navigate("/")} color="inherit">Home</Button>
           <Button onClick={()=>navigate("/movies")}  color="inherit">Movies</Button>
           <Button onClick={()=>navigate("/movies/Add")}  color="inherit">Add Movies</Button>
+          <Button onClick={()=>navigate("/basic-form")}  color="inherit">basic form</Button>
+          <Button startIcon ={
+            mode ==="dark"?<Brightness7Icon/>:<Brightness4Icon/>
+          }
+          sx= {{marginLeft:"Auto"}}
+          onClick={()=> setMode(mode ==="light"?"dark":"light")}  color="inherit">{mode ==="light"?"DARK":"LIGHT"} MODE</Button>
         </Toolbar>
       </AppBar>
 
@@ -130,8 +149,11 @@ function App() {
         <Route path="*" element={ <NotFound /> } />
         <Route path="/movies/:id" element={  <MovieDetails movieList={movieList} /> } />
         <Route path="/films" element ={<Navigate replace to="/movies" />} />
+        <Route path="/basic-form" element={ <BasicForm /> } />
       </Routes> 
     </div>
+    </Paper>
+    </ThemeProvider>
   );
 }
 
@@ -142,18 +164,8 @@ function Home(){
     </div>
   );
 
-  // const darkTheme = createTheme({
-  //   palette: {
-  //     mode: "dark",
-  //   },
-  // });  
-  // return (
-  //   <ThemeProvider theme={darkTheme}>
-  //   </ThemeProvider>
-  // );
+
+
   }
-
- 
-
 
 export default App;
