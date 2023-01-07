@@ -1,17 +1,23 @@
-import img1 from './img/1.avif';
 import './App.css';
 import {useState} from "react";
+import {AddMovies} from "./AddMovies.js";
 import {Movielist} from "./Movielist.js";
-import {Movie} from "./Movie.js";
+import Button from '@mui/material/Button';
 import {
   Routes,
   Route,
-Link,Navigate, useParams} from "react-router-dom";
+Link,Navigate, useNavigate} from "react-router-dom";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 //import { Home } from '@mui/icons-material';
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import { NotFound } from './NotFound';
+import { MovieDetails } from './MovieDetails';
+
 
 function App() {
-
+  const navigate =useNavigate();
   const [movieList,setMovieList]= useState(
     [
       { "id" : "99",
@@ -109,68 +115,23 @@ function App() {
 
   return (
      <div className="App"> 
-<nav>
-    <ul>
-      <li>
-        <Link to="/"> Home</Link>
-      </li>
-      <li>
-        <Link to="/movies"> Movies</Link>
-      </li>
-    </ul>
-  </nav>
+  <AppBar position="static">
+        <Toolbar>
+          <Button onClick={()=>navigate("/")} color="inherit">Home</Button>
+          <Button onClick={()=>navigate("/movies")}  color="inherit">Movies</Button>
+          <Button onClick={()=>navigate("/movies/Add")}  color="inherit">Add Movies</Button>
+        </Toolbar>
+      </AppBar>
+
       <Routes>
         <Route path="/" element={ <Home /> } />
-        <Route path="/movies" element={  <Movielist movieList={movieList} setMovieList={setMovieList}/> } />
+        <Route path="/movies" element={  <Movielist movieList={movieList}/> } />
+        <Route path="/movies/add" element={<AddMovies  movieList={movieList}  setMovieList={setMovieList} />}/> 
         <Route path="*" element={ <NotFound /> } />
         <Route path="/movies/:id" element={  <MovieDetails movieList={movieList} /> } />
         <Route path="/films" element ={<Navigate replace to="/movies" />} />
       </Routes> 
     </div>
-  );
-}
-
-// https://63a6dc12f8f3f6d4ab13a8d2.mockapi.io/movies
-function NotFound()
-{
-  return (
-  <div>
-    <img
-    className ="not-found"
-     src="http://www.digitalmesh.com/blog/wp-content/uploads/2020/05/404-error.jpg"
-     alt="404 not found"
-     ></img>
-  </div>
-  );
-}
-
-function MovieDetails({movieList}){
-  // console.log(useParams());
-  const {id} =useParams();
-  const movie = movieList[id];
-  const ratingstyle ={
-    color:movie.rating >=8.5 ?"green":"red",
-  }
-
-  console.log(id,movieList);
-  return(
-    <div>
-    <iframe width="100%"
-     height="750" 
-     src={movie.trailer}
-    title="VIKRAM - Official Trailer | Kamal Haasan | VijaySethupathi, FahadhFaasil | LokeshKanagaraj | Anirudh"
-      frameborder="0"
-   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-   allowfullscreen>    
-   </iframe>
-    <div className ="movie-details-container">
-    <div className="movie-specs">
-  <h2 className="movie-name">{movie.name}</h2>
-  <p style ={ratingstyle} className ="movie-rating">⭐{movie.rating}</p>
-  </div>
- <p className ="movie-summary">{movie.summary}</p>   
-</div>
-</div>
   );
 }
 
@@ -181,15 +142,15 @@ function Home(){
     </div>
   );
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: "dark",
-    },
-  });  
-  return (
-    <ThemeProvider theme={darkTheme}>
-    </ThemeProvider>
-  );
+  // const darkTheme = createTheme({
+  //   palette: {
+  //     mode: "dark",
+  //   },
+  // });  
+  // return (
+  //   <ThemeProvider theme={darkTheme}>
+  //   </ThemeProvider>
+  // );
   }
 
  

@@ -9,8 +9,8 @@
 }
 
 .movie-container {
-  background-color: white;
   width: 340px;
+  height:min-content;
 }
 
 .movie-poster {
@@ -50,9 +50,14 @@
 .add-movie-form{
   display:flex;
   flex-direction:column;
-  gap:10px;
-  width:300px;
-}
+  margin-left: 190px;
+  margin-top : 50px;
+  gap:20px;
+  width:30%;
+  align-items: stretch;
+  align-content: flex-end;
+  flex-wrap:wrap
+    }
 
 .not-found{
   width:100%;
