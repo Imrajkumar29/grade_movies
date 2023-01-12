@@ -2,16 +2,29 @@ import Button from '@mui/material/Button';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import { useParams, useNavigate } from "react-router-dom";
 import * as React from 'react';
+import { useState,useEffect } from 'react'; 
 
-export function MovieDetails({ movieList }) {
+export function MovieDetails() {
   // console.log(useParams());
   const { id } = useParams();
-  const movie = movieList[id];
+
+  const [movie,setMovie]=useState([]);
+  //const movie = movieList[id];
+  
+  useEffect(()=>{
+    fetch(`https://63a6dc12f8f3f6d4ab13a8d2.mockapi.io/movies/${id}`)
+    .then((data)=>data.json())
+    .then((mv)=>setMovie(mv))
+  },[]);
+
   const ratingstyle = {
     color: movie.rating >= 8.5 ? "green" : "red",
   };
   const navigate = useNavigate();
-  console.log(id, movieList);
+  console.log(id, movie);
+
+
+
   return (
     <div>
       <iframe width="100%"

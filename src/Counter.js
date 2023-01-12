@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect,useState} from "react";
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Stack from '@mui/material/Stack';
@@ -20,6 +20,9 @@ function Counter(){
     const messageStyle ={
       display :like-dislike>=10 ?"block":"none",
     };
+    // useEffect(()=>{
+    // console.log("the like value is : ",like);
+    // },[like]);
     return(
   <div>
     {/* onClick ->camelCase */}
