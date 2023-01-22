@@ -3,6 +3,7 @@ import {useState} from "react";
 import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useNavigate } from "react-router-dom";
 
 const movieValidationSchema=yup.object({
     name: yup.string().required(),
@@ -33,6 +34,8 @@ export function AddMovies({movieList,setMovieList}){
         }
     })
 
+    const navigate = useNavigate();
+
     const addMovie=(newMovie)=>{
         // const newMovie={
         //     name,
@@ -40,8 +43,20 @@ export function AddMovies({movieList,setMovieList}){
         //     rating,
         //     summary,
         // };
+
+        //Post method -fetch
+        //1. method - POST
+        //2data(newMovie)- body &JSON
+        //3.Header -JSON
+        fetch(`https://63a6dc12f8f3f6d4ab13a8d2.mockapi.io/movies`,{
+            method: "POST",
+            body: JSON.stringify(newMovie),
+            headers: {
+                'Content-type':"application/json",
+            },
+          }).then(()=>navigate("/movies"));    
         // copy the movieList and then add newMovie to it
-        setMovieList([...movieList,newMovie]);
+       // setMovieList([...movieList,newMovie]);
     };
     return(      
           <form onSubmit ={formik.handleSubmit} className="add-movie-form">

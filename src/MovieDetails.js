@@ -15,15 +15,13 @@ export function MovieDetails() {
     fetch(`https://63a6dc12f8f3f6d4ab13a8d2.mockapi.io/movies/${id}`)
     .then((data)=>data.json())
     .then((mv)=>setMovie(mv));
-  },[]);
+  },[id]);
 
   const ratingstyle = {
     color: movie.rating >= 8.5 ? "green" : "red",
   };
   const navigate = useNavigate();
   console.log(id, movie);
-
-
 
   return (
     <div>

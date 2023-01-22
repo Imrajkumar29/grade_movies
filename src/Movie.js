@@ -9,7 +9,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 
-function Movie({movie,id}){
+function Movie({movie,id,deleteButton}){
   let [show,setShow] =useState(0);
     const ratingstyle ={
       color:movie.rating >=8.5 ?"green":"red",
@@ -32,7 +32,7 @@ function Movie({movie,id}){
         </IconButton>
         </CardContent>
         <CardActions>
-      <Counter/>
+      <Counter/>{deleteButton}
       </CardActions>
     </Card>
     );
