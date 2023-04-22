@@ -1,82 +1,95 @@
-import './App.css';
-import {useState} from "react";
-import {AddMovies} from "./AddMovies.js";
-import {BasicForm} from "./BasicForm.js";
-import {Movielist} from "./Movielist.js";
-import Button from '@mui/material/Button';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import {
-  Routes,
-  Route,
-Link,Navigate, useNavigate} from "react-router-dom";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import "./App.css";
+import { useState } from "react";
+import { AddMovies } from "./AddMovies.js";
+import { BasicForm } from "./BasicForm.js";
+import { Movielist } from "./Movielist.js";
+import Button from "@mui/material/Button";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 //import { Home } from '@mui/icons-material';
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import { NotFound } from './NotFound';
-import { MovieDetails } from './MovieDetails';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import { EditMovie } from './EditMovie';
-
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { NotFound } from "./NotFound";
+import { MovieDetails } from "./MovieDetails";
+import Paper from "@mui/material/Paper";
+import { EditMovie } from "./EditMovie";
 
 function App() {
-  const [mode,setMode] =useState("light");
+  const [mode, setMode] = useState("light");
   const darkTheme = createTheme({
     palette: {
       mode: mode,
     },
   });
-  const navigate =useNavigate();
-  const [movieList,setMovieList]= useState([]);
+  const navigate = useNavigate();
+  const [movieList, setMovieList] = useState([]);
 
-//empty array for component did mount
+  //empty array for component did mount
   return (
     <ThemeProvider theme={darkTheme}>
-       <Paper sx ={{minHeight:"100vh", borderRadius: "0px" }} elevation={4}>
-     <div className="App"> 
-  <AppBar position="static">
-        <Toolbar>
-          <Button onClick={()=>navigate("/")} color="inherit">Home</Button>
-          <Button onClick={()=>navigate("/movies")}  color="inherit">Movies</Button>
-          <Button onClick={()=>navigate("/movies/Add")}  color="inherit">Add Movies</Button>
-          <Button onClick={()=>navigate("/basic-form")}  color="inherit">basic form</Button>
-          <Button startIcon ={
-            mode ==="dark"?<Brightness7Icon/>:<Brightness4Icon/>
-          }
-          sx= {{marginLeft:"Auto"}}
-          onClick={()=> setMode(mode ==="light"?"dark":"light")}  color="inherit">{mode ==="light"?"DARK":"LIGHT"} MODE</Button>
-        </Toolbar>
-      </AppBar>
+      <Paper sx={{ minHeight: "100vh", borderRadius: "0px" }} elevation={4}>
+        <div className="App">
+          <AppBar position="static">
+            <Toolbar>
+              <Button onClick={() => navigate("/")} color="inherit">
+                Home
+              </Button>
+              <Button onClick={() => navigate("/movies")} color="inherit">
+                Movies
+              </Button>
+              <Button onClick={() => navigate("/movies/Add")} color="inherit">
+                Add Movies
+              </Button>
+              <Button onClick={() => navigate("/basic-form")} color="inherit">
+                basic form
+              </Button>
+              <Button
+                startIcon={
+                  mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />
+                }
+                sx={{ marginLeft: "Auto" }}
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}
+                color="inherit"
+              >
+                {mode === "light" ? "DARK" : "LIGHT"} MODE
+              </Button>
+            </Toolbar>
+          </AppBar>
 
-      <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/movies" element={  <Movielist/> } />
-        <Route path="/movies/add" element={<AddMovies  movieList={movieList}  setMovieList={setMovieList} />}/> 
-        <Route path="*" element={ <NotFound /> } />
-        <Route path="/movies/:id" element={  <MovieDetails movieList={movieList} /> } />
-        <Route path="/movies/edit/:id" element={  <EditMovie/> } />
-        <Route path="/films" element ={<Navigate replace to="/movies" />} />
-        <Route path="/basic-form" element={ <BasicForm /> } />
-      </Routes> 
-    </div>
-    </Paper>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movielist />} />
+            <Route
+              path="/movies/add"
+              element={
+                <AddMovies movieList={movieList} setMovieList={setMovieList} />
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+            <Route
+              path="/movies/:id"
+              element={<MovieDetails movieList={movieList} />}
+            />
+            <Route path="/movies/edit/:id" element={<EditMovie />} />
+            <Route path="/films" element={<Navigate replace to="/movies" />} />
+            <Route path="/basic-form" element={<BasicForm />} />
+          </Routes>
+        </div>
+      </Paper>
     </ThemeProvider>
   );
 }
 
-function Home(){
-  return(
+function Home() {
+  return (
     <div>
       <h1>Welcome to the Movie app</h1>
     </div>
   );
-
-
-
-  }
+}
 
 export default App;
 // [
@@ -161,7 +174,7 @@ export default App;
 //       "trailer": "https://www.youtube.com/embed/KsH2LA8pCjo",
 //       "id": "108"
 //       },
-      
+
 //       {
 //       "name": "Thor: Ragnarok",
 //       "poster": "https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_.jpg",
