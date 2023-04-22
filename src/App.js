@@ -19,6 +19,7 @@ import { NotFound } from './NotFound';
 import { MovieDetails } from './MovieDetails';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
+import { EditMovie } from './EditMovie';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/movies/add" element={<AddMovies  movieList={movieList}  setMovieList={setMovieList} />}/> 
         <Route path="*" element={ <NotFound /> } />
         <Route path="/movies/:id" element={  <MovieDetails movieList={movieList} /> } />
+        <Route path="/movies/edit/:id" element={  <EditMovie/> } />
         <Route path="/films" element ={<Navigate replace to="/movies" />} />
         <Route path="/basic-form" element={ <BasicForm /> } />
       </Routes> 
